@@ -12,17 +12,65 @@
 <body>
   <h1>Journey to New York</h1>
   <div id="output"></div>
+  <div id="choices"></div>
 
   <py-script>
-from pyscript import Element
+from pyscript import Element, display
 
-def start_game():
-    output = Element("output")
-    output.write("You arrive at Ellis Island. Do you stay with family or look for a home?")
+# The story data
+scenes = {
+    "start": {
+        "text": "You arrive at Ellis Island. Do you stay with family or look for a home?",
+        "choices": [
+            {"label": "Stay with family", "next": "family"},
+            {"label": "Find your own home", "next": "home"}
+        ]
+    },
+    "family": {
+        "text": "You live with family in a crowded tenement. Do you get a job or go to school?",
+        "choices": [
+            {"label": "Get a job", "next": "job"},
+            {"label": "Go to school", "next": "school"}
+        ]
+    },
+    "home": {
+        "text": "You rent a tiny apartment. You must now find work. Do you work in a factory or sell food?",
+        "choices": [
+            {"label": "Factory", "next": "job"},
+            {"label": "Sell food", "next": "vendor"}
+        ]
+    },
+    "job": {
+        "text": "You work long hours but help your family survive. The end.",
+        "choices": []
+    },
+    "school": {
+        "text": "You go to school and dream of becoming a writer. The end.",
+        "choices": []
+    },
+    "vendor": {
+        "text": "You sell food on the street, building community ties. The end.",
+        "choices": []
+    }
+}
 
-start_game()
+def show_scene(scene_key):
+    scene = scenes[scene_key]
+    Element("output").write(scene["text"])
+    
+    # Clear previous buttons
+    Element("choices").clear()
+
+    # Create buttons for choices
+    for choice in scene["choices"]:
+        button_html = f"""
+        <button py-click="show_scene('{choice['next']}')">
+            {choice['label']}
+        </button>
+        """
+        display(button_html, target="choices")
+
+show_scene("start")
   </py-script>
 </body>
 </html>
-
-
