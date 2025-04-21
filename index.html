@@ -1,1 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Immigrant Story Game</title>
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body>
+  <h1>Journey to New York</h1>
+  <div id="output"></div>
 
+  <py-script>
+def start_game():
+    output = Element("output")
+    output.write("You arrive at Ellis Island. Do you stay with family or look for a home?")
+start_game()
+  </py-script>
+</body>
+</html>
