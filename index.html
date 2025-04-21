@@ -9,11 +9,15 @@
   <h1>Journey to New York</h1>
   <div id="output"></div>
 
-  <py-script>
+<py-script>
+from pyscript import Element
+
 def start_game():
     output = Element("output")
     output.write("You arrive at Ellis Island. Do you stay with family or look for a home?")
+
 start_game()
-  </py-script>
+</py-script>
+
 </body>
 </html>
